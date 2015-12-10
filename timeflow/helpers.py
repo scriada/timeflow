@@ -33,7 +33,7 @@ def read_log_file_lines():
 
 def form_log_message(message):
     time_str = dt.now().strftime(DATETIME_FORMAT)
-    log_message = ': '.join((time_str, message))
+    log_message = ' '.join((time_str, message))
     if is_another_day():
         return '\n' + log_message + '\n'
     else:

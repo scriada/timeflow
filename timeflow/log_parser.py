@@ -24,9 +24,6 @@ class Line():
 
 def clean_line(time, project, log):
     "Cleans line data from unnecessary chars"
-    # time has extra colon at the end, so we remove it
-    time = time[:-1]
-
     # project and log can have new line char at the end, remove it
     if project and project[-1] == '\n':
         project = project[:-1]
@@ -74,7 +71,12 @@ def parse_line(line):
     [date]_[time]:_[project]:_[log message]
     """
     # get date time and the rest of a message
-    date, time, message = re.split(r' ', line, maxsplit=2)
+    split = line.strip().split(None, 2)
+    if len(split) == 3:
+        date, time, message = split
+    else:
+        message = ''
+        date, time = split
 
     project, log = parse_message(message)
     time, project, log = clean_line(time, project, log)
