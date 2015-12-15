@@ -9,7 +9,7 @@ import os
 import sys
 
 
-LOG_FILE = os.path.expanduser('~') + '/.timeflow'
+LOG_FILE = os.path.expanduser('~/timelog.txt')
 DATETIME_FORMAT = "%Y-%m-%d %H:%M"
 DATE_FORMAT = "%Y-%m-%d"
 # length of date string
