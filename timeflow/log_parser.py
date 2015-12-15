@@ -36,15 +36,17 @@ def clean_line(time, project, log):
 
 def parse_message(message):
     "Parses message as log can be empty"
-    parsed_message = re.split(r': ', message, maxsplit=1)
+    parsed_message = message.split(': ', 1)
 
-    # if parsed message has only project stated, then log is empty
-    if len(parsed_message) == 1:
-        if type(parsed_message) == list:
-            project = parsed_message[0]
+    # if parsed message has only log stated, then the default project of Other is used
+    if len(parsed_message) == 1:  # No colon found so either only a project has been put down or only a log
+        split_message = parsed_message[0].split(None, 1)
+        if len(split_message) == 1:
+            project, log = parsed_message[0], ''
+        elif parsed_message[0].lower().startswith('eq-'):
+            project, log = split_message
         else:
-            project = parsed_message
-        log = ''
+            project, log = 'Other', parsed_message[0]
     else:
         project, log = parsed_message
 
