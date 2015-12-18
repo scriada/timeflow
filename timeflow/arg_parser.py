@@ -45,7 +45,6 @@ def edit(args):
 
 def stats(args):
     today = False
-    date_from = date_to = None
     if args.yesterday:
         yesterday_obj = dt.now() - timedelta(days=1)
         date_from = date_to = yesterday_obj.strftime(DATE_FORMAT)
