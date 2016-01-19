@@ -15,7 +15,7 @@ from timeflow.helpers import (
     print_stats,
     print_report,
     write_to_log_file,
-)
+    print_today_work_time)
 
 from timeflow.log_parser import (
     calculate_report,
@@ -69,17 +69,16 @@ def stats(args):
         date_from = date_to = dt.now().strftime(DATE_FORMAT)
         today = True
 
+    lines = read_log_file_lines()
+    work_time, slack_time, today_work_time = calculate_stats(lines, date_from, date_to, today=today)
     if args.report:
-        work_report, slack_report = calculate_report(read_log_file_lines(),
-                                                     date_from,
-                                                     date_to)
+        work_report, slack_report = calculate_report(lines, date_from, date_to)
 
-        print_report(work_report, slack_report)
-
-    work_time, slack_time, today_work_time = calculate_stats(
-        read_log_file_lines(), date_from, date_to, today=today
-    )
-    print_stats(work_time, slack_time, today_work_time)
+        print_report(work_report, slack_report, work_time, slack_time)
+        print_today_work_time(today_work_time)
+    else:
+        print_stats(work_time, slack_time, today_work_time)
+        print_today_work_time(today_work_time)
 
 
 def set_log_parser(subparser):

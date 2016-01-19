@@ -164,17 +164,17 @@ def print_stats(work_time, slack_time, today_work_time):
     work_hours, work_minutes = get_time(sum(work_time))
     slack_hours, slack_minutes = get_time(sum(slack_time))
 
-    work_string = 'Work: {:02}h {:02}min'.format(work_hours, work_minutes)
-    slack_string = 'Slack: {:02}h {:02}min'.format(slack_hours, slack_minutes)
+    work_string = 'Work: {:02}h {:02}m'.format(work_hours, work_minutes)
+    slack_string = 'Slack: {:02}h {:02}m'.format(slack_hours, slack_minutes)
 
     print(work_string)
     print(slack_string)
 
+
+def print_today_work_time(today_work_time):
     if today_work_time:
         today_hours, today_minutes = get_time(today_work_time)
-        work_string = '\nToday working for: {:02}h {:02}min'.format(
-            today_hours, today_minutes
-        )
+        work_string = '\nToday working for: {:02}h {:02}m'.format(today_hours, today_minutes)
         print(work_string)
 
 
@@ -205,10 +205,14 @@ def create_report(report_dict):
     return '\n'.join(reports)
 
 
-def print_report(work_report_dict, slack_report_dict):
+def print_report(work_report_dict, slack_report_dict, work_time, slack_time):
     work_report = create_report(work_report_dict)
     slack_report = create_report(slack_report_dict)
-    print('-' * 30, 'WORK', '-' * 31)
+
+    work_hours, work_minutes = get_time(sum(work_time))
+    slack_hours, slack_minutes = get_time(sum(slack_time))
+
+    print('{:-^80}'.format(' WORK {}h {}m '.format(work_hours, work_minutes)))
     print(work_report)
-    print('-' * 30, 'SLACK', '-' * 30)
+    print('{:-^80}'.format(' SLACK {}h {}m '.format(slack_hours, slack_minutes)))
     print(slack_report)
