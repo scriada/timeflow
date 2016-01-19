@@ -190,17 +190,11 @@ def create_report(report_dict):
             hr, mn = get_time(project_report[log])
 
             # do not leave trailing space if there is no log
+            time = '{}h {}m'.format(hr, mn)
             if log:
-                report += "    {hours}h {minutes}m: {log}\n".format(
-                    hours=hr,
-                    minutes=mn,
-                    log=log
-                )
+                report += "    {:>7}: {}\n".format(time, log)
             else:
-                report += "    {hours}h {minutes}m\n".format(
-                    hours=hr,
-                    minutes=mn
-                )
+                report += "    {:>7}\n".format(time)
 
         hr, mn = get_time(total_seconds)
         report += "    Total: {hours}h {minutes}m\n".format(
