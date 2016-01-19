@@ -182,7 +182,7 @@ def create_report(report_dict):
     reports = []
     report_dict = OrderedDict(sorted(report_dict.items()))
     for project in report_dict:
-        report = "{}:\n".format(project)
+        report = ""
         project_report = report_dict[project]
         total_seconds = 0
         for log in project_report:
@@ -197,10 +197,7 @@ def create_report(report_dict):
                 report += "    {:>7}\n".format(time)
 
         hr, mn = get_time(total_seconds)
-        report += "    Total: {hours}h {minutes}m\n".format(
-            hours=hr,
-            minutes=mn
-        )
+        report = "{}: {}h {}m\n".format(project, hr, mn) + report
         reports.append(report)
     return '\n'.join(reports)
 
