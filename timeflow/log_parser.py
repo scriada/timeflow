@@ -61,16 +61,14 @@ def find_slack(project, log):
 
 def strip_log(string):
     "Strips string from slack marks and leading/trailing spaces"
-    if string.endswith("**"):
-        string = string[:-2]
-    return string.strip()
+    return string.strip().rstrip('**')
 
 
 def parse_line(line):
     """Parses log line into logical units: time, project and message
 
     Log line looks like this:
-    [date]_[time]:_[project]:_[log message]
+    [date]_[time]_[project]:_[log message]
     """
     # get date time and the rest of a message
     split = line.strip().split(None, 2)
