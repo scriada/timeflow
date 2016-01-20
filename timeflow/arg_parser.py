@@ -31,9 +31,11 @@ def edit(args):
     if args.editor:
         subprocess.call([args.editor, LOG_FILE])
     else:
-        subprocess.call(['echo', 'Trying to open $EDITOR'])
-        if os.environ.get('EDITOR'):
-            subprocess.call([os.environ.get('EDITOR'), LOG_FILE])
+        editor = os.environ.get('EDITOR')
+        if editor in ('vi', 'vim'):  # open the file with the cursor on the last line of the file
+            subprocess.call([editor, '+', LOG_FILE])
+        elif editor:
+            subprocess.call([editor, LOG_FILE])
         else:
             subprocess.call([
                 "echo",
