@@ -178,15 +178,15 @@ def print_today_work_time(today_work_time):
         print(work_string)
 
 
-def create_report(report_dict):
+def create_report(report_dict, total_seconds):
     reports = []
     report_dict = OrderedDict(sorted(report_dict.items()))
     for project in report_dict:
         report = ""
         project_report = report_dict[project]
-        total_seconds = 0
+        proj_seconds = 0
         for log in project_report:
-            total_seconds += project_report[log]
+            proj_seconds += project_report[log]
             hr, mn = get_time(project_report[log])
 
             # do not leave trailing space if there is no log
@@ -196,18 +196,19 @@ def create_report(report_dict):
             else:
                 report += "    {:>7}\n".format(time)
 
-        hr, mn = get_time(total_seconds)
-        report = "{}: {}h {}m\n".format(project, hr, mn) + report
+        hr, mn = get_time(proj_seconds)
+        report = "{}: {}h {}m ({:.2%})\n".format(project, hr, mn, proj_seconds / float(total_seconds)) + report
         reports.append(report)
     return '\n'.join(reports)
 
 
 def print_report(work_report_dict, slack_report_dict, work_time, slack_time):
-    work_report = create_report(work_report_dict)
-    slack_report = create_report(slack_report_dict)
+    work_seconds, slack_seconds = sum(work_time), sum(slack_time)
+    work_report = create_report(work_report_dict, work_seconds)
+    slack_report = create_report(slack_report_dict, slack_seconds)
 
-    work_hours, work_minutes = get_time(sum(work_time))
-    slack_hours, slack_minutes = get_time(sum(slack_time))
+    work_hours, work_minutes = get_time(work_seconds)
+    slack_hours, slack_minutes = get_time(slack_seconds)
 
     print('{:-^80}'.format(' WORK {}h {}m '.format(work_hours, work_minutes)))
     print(work_report)
