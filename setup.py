@@ -23,6 +23,10 @@ setup(
 
     long_description=read('README.rst'),
 
+    install_requires=[
+        'termcolor'
+    ],
+
     entry_points='''
         [console_scripts]
         timeflow=timeflow.main:main

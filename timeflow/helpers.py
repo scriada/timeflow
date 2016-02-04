@@ -8,6 +8,8 @@ import calendar
 import os
 import sys
 
+from termcolor import colored
+
 
 LOG_FILE = os.path.expanduser('~/timelog.txt')
 DATETIME_FORMAT = "%Y-%m-%d %H:%M"
@@ -191,13 +193,14 @@ def create_report(report_dict, total_seconds):
 
             # do not leave trailing space if there is no log
             time = '{}h {}m'.format(hr, mn)
-            if log:
-                report += "    {:>7}: {}\n".format(time, log)
-            else:
-                report += "    {:>7}\n".format(time)
+            report += "    {:>7}".format(time)
+            report += colored(": {}\n".format(log), 'green') if log else '\n'
 
         hr, mn = get_time(proj_seconds)
-        report = "{}: {}h {}m ({:.2%})\n".format(project, hr, mn, proj_seconds / float(total_seconds)) + report
+
+        report = (colored(project, 'white', attrs=['bold'])
+                  + ": {}h {}m ({:.2%})\n".format(hr, mn, proj_seconds / float(total_seconds))
+                  + report)
         reports.append(report)
     return '\n'.join(reports)
 
