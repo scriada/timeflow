@@ -27,5 +27,8 @@ setup(
         [console_scripts]
         timeflow=timeflow.main:main
         tf=timeflow.main:main
+        tl=timeflow.main:log
+        ts=timeflow.main:stats_report
+        te=timeflow.main:edit
     ''',
 )
