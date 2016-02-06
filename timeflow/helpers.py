@@ -30,7 +30,11 @@ def write_to_log_file(message):
 
 def read_log_file_lines():
     with open(LOG_FILE, 'r') as fp:
-        return [line for line in fp.readlines() if line != '\n']
+        return [line for line in fp.readlines() if _is_valid_line(line)]
+
+
+def _is_valid_line(line):
+    return not (line == '\n' or line.startswith('#'))
 
 
 def form_log_message(message):
