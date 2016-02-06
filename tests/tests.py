@@ -4,8 +4,12 @@ import subprocess
 import sys
 import unittest
 
-from io import StringIO
-from unittest import mock
+try:
+    from unittest import mock
+    from io import StringIO
+except ImportError:
+    import mock
+    from StringIO import StringIO
 
 from timeflow import helpers
 from timeflow.arg_parser import parse_args
