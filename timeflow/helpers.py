@@ -54,8 +54,8 @@ def is_another_day():
     date - message date
     """
     try:
-        f = open(LOG_FILE, 'r')
-        last_line = f.readlines()[-1]
+        with open(LOG_FILE, 'r') as f:
+            last_line = f.readlines()[-1]
     except (IOError, IndexError):
         return False
 
