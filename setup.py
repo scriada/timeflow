@@ -26,6 +26,7 @@ setup(
     install_requires=[
         'termcolor'
     ],
+    test_suite='tests.tests',
 
     entry_points='''
         [console_scripts]
