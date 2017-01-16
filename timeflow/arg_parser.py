@@ -102,7 +102,7 @@ def set_stats_parser(subparser):
 
     stats_parser.add_argument("--today", action="store_true", help="Show today's work times (default)")
     stats_parser.add_argument("-y", "--yesterday", action="store_true", help="Show yesterday's work times")
-    stats_parser.add_argument("-d", "--day", help="Show specific day's work times")
+    stats_parser.add_argument("-d", "--day", metavar="YYYY-MM-DD", help="Show specific day's work times")
 
     stats_parser.add_argument("--week", help="Show specific week's work times")
     stats_parser.add_argument("--last-week", action="store_true", help="Show last week's work times")
@@ -110,8 +110,8 @@ def set_stats_parser(subparser):
     stats_parser.add_argument("--month", help="Show specific month's work times")
     stats_parser.add_argument("--last-month", action="store_true", help="Show last month's work times")
 
-    stats_parser.add_argument("-f", "--from", help="Show work times from specific date", dest="_from")
-    stats_parser.add_argument("-t", "--to", help="Show work times from to specific date")
+    stats_parser.add_argument("-f", "--from", metavar="YYYY-MM-DD", help="Show work times from specific date", dest="_from")
+    stats_parser.add_argument("-t", "--to", metavar="YYYY-MM-DD", help="Show work times from to specific date")
 
     stats_parser.add_argument("-r", "--report", action="store_true", help="Show stats in report form")
     stats_parser.add_argument("-c", "--color", action="store_true", help="Colorize stats report")
