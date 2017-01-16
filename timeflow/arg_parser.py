@@ -24,7 +24,7 @@ from timeflow.log_parser import (
 
 
 def log(args):
-    write_to_log_file(args.message)
+    write_to_log_file(' '.join(args.message))
 
 
 def edit(args):
@@ -85,7 +85,7 @@ def stats(args):
 
 def set_log_parser(subparser):
     log_parser = subparser.add_parser("log", help="Create timelog message")
-    log_parser.add_argument("message", nargs='?', default="", help="message that will be logged")
+    log_parser.add_argument("message", nargs='*', default="", help="message that will be logged")
     # call log() function, when processing log command
     log_parser.set_defaults(func=log)
 
