@@ -233,6 +233,7 @@ def _make_colorizer(colorize):
         'project_name': 'green',
         'work_header': 'cyan',
         'slack_header': 'yellow',
+        'log': 'yellow',
     }
     attrs = {
         'project_name': ['bold'],
