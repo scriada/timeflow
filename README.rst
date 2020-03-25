@@ -90,3 +90,5 @@ Commands & options
     ``-t DATE, --to DATE`` - shows work and slack time, up to DATE. Must be used with ``--from`` option.
 
     ``--report`` - shows report for today, or some other time range if specified using available options.
+
+    ``-c, --color`` - colorise the stats report.
